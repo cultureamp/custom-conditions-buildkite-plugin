@@ -16,9 +16,8 @@ This plugin attempts to provide basic functionality to allow you to conditionall
 steps:
   - plugins:
       - cultureamp/custom-conditions#v0.1.0:
-          condition:
-            name: git-diff
-            ssm_prefix: 'ssm prefix'
+          type: git-diff
+          ssm-prefix: 'ssm prefix'
 
 ```
 ## Custom Condition
@@ -28,9 +27,8 @@ steps:
 steps:
   - plugins:
       - cultureamp/custom-conditions#v0.1.0:
-          custom:
-            script-path: 'path-to-script'
-            inject-if-exit: 0 (default)
+          type: custom-script
+          script-path: 'path-to-script'
 
 ```
 

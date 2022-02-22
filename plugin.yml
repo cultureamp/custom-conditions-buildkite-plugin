@@ -1,0 +1,11 @@
+name: custom-conditions
+description: Inject Steps with custom conditions.
+author: https://github.com/tobig77
+requirements:
+  - docker
+configuration:
+  properties:
+    type: string
+    ssm-prefix: string
+    script-path: string
+  additionalProperties: false
