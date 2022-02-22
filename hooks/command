@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ueo pipefail
+set -xueo pipefail
 
 curr_dir="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 

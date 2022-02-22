@@ -1,7 +1,7 @@
 #!/bin/bash
 
-export
+set -xeuo pipefail
 
-set -euo pipefail
+export
 
 echo "Running git-diff.bash"
