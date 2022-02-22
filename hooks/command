@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+set -ueo pipefail
+
+curr_dir="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+
+condition_type="${BUILDKITE_PLUGIN_CUSTOM_CONDITION_TYPE:-}"
+
+condition_script="$curr_dir/../lib/${condition_type}.bash"
+test -e "$condition_script" || { echo "condition not supported: $condition_type" ; exit 1 ;}
+
+exec $condition_script
