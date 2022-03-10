@@ -3,7 +3,7 @@
 Inject steps based on custom conditions defined by you
 # Background
 
-The if conditions supported by buildkite are rendered very early and thus do not allow use of runtime derived values, such as a computed value from an earlier step or just a simple conditional switch.
+The if conditions supported by buildkite do not allow use of runtime derived values, such as a computed value from an earlier step or just a simple conditional switch.
 
 This plugin attempts to provide basic functionality to allow you to conditionally inject steps without having to reinvent the wheel every time.
 
@@ -16,10 +16,10 @@ This plugin attempts to provide basic functionality to allow you to conditionall
 steps:
   - plugins:
       - cultureamp/custom-conditions#v0.1.0:
-          type: git-diff
-          ssm-prefix: 'ssm prefix'
+          condition: git-diff
 
 ```
+
 ## Custom Condition
 
 ```yaml

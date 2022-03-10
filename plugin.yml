@@ -5,7 +5,8 @@ requirements:
   - docker
 configuration:
   properties:
-    type: string
-    ssm-prefix: string
+    condition: string
+    git-path: string
     script-path: string
+    ssm-prefix: string
   additionalProperties: false
