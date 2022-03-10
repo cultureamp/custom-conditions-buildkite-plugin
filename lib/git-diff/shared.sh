@@ -11,3 +11,5 @@ test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SSM_PREFIX:-}" || { echo "ssm-pref
 
 ssm_parameter_name="/$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SSM_PREFIX/$BUILDKITE_PIPELINE_SLUG/$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH"
 ssm_parameter_name="${ssm_parameter_name%%/}"
+
+export ssm_parameter_name
