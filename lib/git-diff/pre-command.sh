@@ -39,5 +39,5 @@ if [ "$set_bk_metadata" == "true" ]
 then
   echo "Setting buildkite metadata custom-condition-${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME} ${previous_git_rev}"
   buildkite-agent annotate "No change detected since: $previous_git_rev"
-  buildkite-agent metadata set "custom-condition-$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME" "$previous_git_rev"
+  buildkite-agent meta-data set "custom-condition-$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME" "$previous_git_rev"
 fi
