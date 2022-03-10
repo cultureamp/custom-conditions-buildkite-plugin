@@ -6,8 +6,8 @@ set -euo pipefail
 # to run a git diff against a repository path
 
 # check meta-data key is not already in use by something else
-condition_metadata=$(buildkite-agent meta-data get "custom-condition-$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME" 2>/dev/null ||:)
-[ "${condition_metadata:-not_set}" == "not-set" ] || { echo "custom-condition already set in bk meta-data: $BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME" ; exit 1;}
+buildkite-agent meta-data exists "custom-condition-$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME" && \
+  { echo "custom-condition already set in bk meta-data: $BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME" ; exit 1;} ||:
 
 previous_git_rev=$(aws ssm get-parameter \
     --name "/$git_cache_reference" \
