@@ -7,4 +7,3 @@ PLUGIN_STAGE="pre-command"
 
 # shellcheck source=lib/shared.sh
 . "$DIR/../lib/shared.sh"
-
