@@ -5,8 +5,8 @@ requirements:
   - docker
 configuration:
   properties:
-    condition: string
+    name: string
+    type: string
     git-path: string
-    script-path: string
     cache-prefix: string
   additionalProperties: false

@@ -15,8 +15,8 @@ get_last_git_revision() {
 
 previous_git_rev=$(get_last_git_revision) ||:
 
-# by default we run
-run_custom_script=true
+# control whether we will set buildkite metadata or not
+set_bk_metadata=false
 
 if [ -n "$previous_git_rev" ]
 then
@@ -28,18 +28,16 @@ then
   git diff --exit-code \
     "$previous_git_rev" \
     "$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH" && \
-    run_custom_script=false ||:
+    set_bk_metadata=true ||:
 else
   # we have no existing git rev to compare to
   # so trigger should fire
   echo "NO ENTRY IN ${git_cache_reference}"
 fi
 
-if [ "$run_custom_script" == "true" ]
+if [ "$set_bk_metadata" == "true" ]
 then
-  echo "Running $BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SCRIPT_PATH ..."
-  $BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SCRIPT_PATH
-else
-  echo "No change detected since: $previous_git_rev"
+  echo "Setting buildkite metadata custom-condition-${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME} ${previous_git_rev}"
   buildkite-agent annotate "No change detected since: $previous_git_rev"
+  buildkite-agent metadata set "custom-condition-$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME" "$previous_git_rev"
 fi

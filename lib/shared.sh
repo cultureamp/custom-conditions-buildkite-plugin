@@ -5,7 +5,7 @@ curr_dir="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 export
 printenv
 
-condition_type="${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_CONDITION:-}"
+condition_type="${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_TYPE:-}"
 condition_script="$curr_dir/../lib/${condition_type}/${PLUGIN_STAGE}.sh"
 shared_script="$curr_dir/../lib/${condition_type}/shared.sh"
 
