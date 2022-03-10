@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 set -xueo pipefail
 
-curr_dir="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
+PLUGIN_STAGE="post-command"
+source ../lib/shared.sh
 
-condition_type="${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_CONDITION:-}"
-
-condition_script="$curr_dir/../lib/${condition_type}/post-command.sh"
-test -e "$condition_script" || exit 0
-
-exec $condition_script

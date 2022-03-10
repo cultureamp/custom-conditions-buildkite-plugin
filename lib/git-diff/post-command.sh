@@ -2,23 +2,20 @@
 
 set -xeuo pipefail
 
+test -n "${BUILDKITE_COMMIT:-}" || { echo "BUILDKITE_COMMIT environment variable must be provided" ; exit 1;}
+
+test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SCRIPT_PATH:-}" || { echo "script-path option must be provided" ; exit 1;}
+test -x "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SCRIPT_PATH:-}" || { echo "script-path not found or invalid" ; exit 1;}
+test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SSM_PREFIX:-}" || { echo "ssm-prefix option must be provided" ; exit 1;}
+
 export
 printenv
 
-# set_last_git_revision () {
-#   aws ssm put-parameter \
-#     --name "/sales-eng/custom-container-images/$CONDITIONAL_CHECK_SSM_PARAM_NAME" \
-#     --region us-west-2 \
-#     --type "String" \
-#     --overwrite \
-#     --value "$BUILDKITE_COMMIT"
-# }
+ssm_parameter_name="$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SSM_PREFIX/$BUILDKITE_PIPELINE_SLUG/$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH"
 
-# # some inverted logic to allow propagation of exit codes
-# if [ "${run_provided_cmd:-true}" == "true" ]
-# then
-#   $* && set_last_git_revision
-# else
-#   echo "No git diff for $previous_git_rev in $CONDITIONAL_CHECK_GIT_DIFF_PATH"
-# fi
+aws ssm put-parameter \
+  --name "$ssm_parameter_name" \
+  --type "String" \
+  --overwrite \
+  --value "$BUILDKITE_COMMIT"
 
