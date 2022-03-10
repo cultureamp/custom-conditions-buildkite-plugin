@@ -15,7 +15,6 @@ test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SSM_PREFIX:-}" || { echo "ssm-pref
 get_last_git_revision() {
   aws ssm get-parameter \
       --name "$ssm_parameter_name" \
-      --region us-west-2 \
       --with-decryption \
       --output text \
       --query Parameter.Value 2>/dev/null || return
