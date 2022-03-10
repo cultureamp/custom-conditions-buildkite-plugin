@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xeuo pipefail
+set -euo pipefail
 
 # This condition script allows referencing arbitrary commit hashes or branches
 # to run a git diff against a repository path

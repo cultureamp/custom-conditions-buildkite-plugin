@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xeuo pipefail
+set -euo pipefail
 
 # if the meta-data is not set, the cache condition was missed
 # and we want to set it to the current git commit
