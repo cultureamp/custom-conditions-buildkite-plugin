@@ -6,7 +6,11 @@ set -xeuo pipefail
 # to run a git diff against a repository path
 
 get_last_git_revision() {
-  buildkite-agent meta-data get "${git_cache_reference}"
+  aws ssm get-parameter \
+    --name "$git_cache_reference" \
+    --with-decryption \
+    --output text \
+    --query Parameter.Value 2>/dev/null || return
 }
 
 previous_git_rev=$(get_last_git_revision) ||:

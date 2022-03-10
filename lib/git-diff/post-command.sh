@@ -2,4 +2,8 @@
 
 set -xeuo pipefail
 
-buildkite-agent meta-data set "${git_cache_reference}" "$BUILDKITE_COMMIT"
+aws ssm put-parameter \
+  --name "$git_cache_reference" \
+  --type "String" \
+  --overwrite \
+  --value "$BUILDKITE_COMMIT"
