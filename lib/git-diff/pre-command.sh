@@ -5,13 +5,6 @@ set -xeuo pipefail
 # This condition script allows referencing arbitrary commit hashes or branches
 # to run a git diff against a repository path
 
-test -n "${BUILDKITE_COMMIT:-}" || { echo "BUILDKITE_COMMIT environment variable must be provided" ; exit 1;}
-
-test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH:-}" || BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH="."
-test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SCRIPT_PATH:-}" || { echo "script-path option must be provided" ; exit 1;}
-test -x "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SCRIPT_PATH:-}" || { echo "script-path not found or invalid" ; exit 1;}
-test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SSM_PREFIX:-}" || { echo "ssm-prefix option must be provided" ; exit 1;}
-
 get_last_git_revision() {
   aws ssm get-parameter \
       --name "$ssm_parameter_name" \
@@ -20,7 +13,6 @@ get_last_git_revision() {
       --query Parameter.Value 2>/dev/null || return
 }
 
-ssm_parameter_name="$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_SSM_PREFIX/$BUILDKITE_PIPELINE_SLUG/$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH"
 previous_git_rev=$(get_last_git_revision) ||:
 
 # by default we run
