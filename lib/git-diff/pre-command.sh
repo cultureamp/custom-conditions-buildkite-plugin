@@ -19,7 +19,7 @@ then
   # we have a stored git rev so run a git diff
   # if that returns 0, we know the git diff did not found any differences
   echo "GIT REFERENCE FOUND: ${git_cache_reference}"
-  echo "SSM PARAMETER VALUE: $previous_git_rev"
+  echo "CACHED VALUE: $previous_git_rev"
   echo "COMPARING $previous_git_rev <> ${BUILDKITE_COMMIT:-}"
   git diff --exit-code \
     "$previous_git_rev" \
