@@ -8,5 +8,5 @@ configuration:
     condition: string
     git-path: string
     script-path: string
-    ssm-prefix: string
+    cache-prefix: string
   additionalProperties: false
