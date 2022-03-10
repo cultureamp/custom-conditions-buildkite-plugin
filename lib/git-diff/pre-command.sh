@@ -7,7 +7,7 @@ set -xeuo pipefail
 
 get_last_git_revision() {
   aws ssm get-parameter \
-    --name "$git_cache_reference" \
+    --name "/$git_cache_reference" \
     --with-decryption \
     --output text \
     --query Parameter.Value 2>/dev/null || return
