@@ -10,4 +10,5 @@ buildkite-agent meta-data get "custom-condition-$BUILDKITE_PLUGIN_CUSTOM_CONDITI
     --name "/$git_cache_reference" \
     --type "String" \
     --overwrite \
-    --value "$BUILDKITE_COMMIT"
+    --value "$BUILDKITE_COMMIT" \
+    $SSM_PARAM_TAGS_SWITCH

@@ -9,8 +9,9 @@ test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME:-}" || { echo "condition name
 test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_CACHE_PREFIX:-}" || { echo "cache-prefix option must be provided" ; exit 1;}
 test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH:-}" || BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH="."
 
-SSM_PARAM_TAGS="$(plugin_read_list "TAGS")" ||:
-export SSM_PARAM_TAGS
+SSM_PARAM_TAGS_SWITCH="$(plugin_read_list "TAGS")" ||:
+[ -n "${SSM_PARAM_TAGS_SWITCH:-}" ] && SSM_PARAM_TAGS_SWITCH="--tags $SSM_PARAM_TAGS_SWITCH"
+export SSM_PARAM_TAGS_SWITCH
 
 git_cache_reference="$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_CACHE_PREFIX/$BUILDKITE_PIPELINE_SLUG/$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH"
 git_cache_reference="${git_cache_reference%%/}"
