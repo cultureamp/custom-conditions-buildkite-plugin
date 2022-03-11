@@ -5,8 +5,14 @@ requirements:
   - docker
 configuration:
   properties:
-    name: string
-    type: string
-    git-path: string
-    cache-prefix: string
+    name:
+      type: string
+    type:
+      type: string
+    git-path:
+      type: string
+    cache-prefix:
+      type: string
+    tags:
+      type: [ string, array ]
   additionalProperties: false
