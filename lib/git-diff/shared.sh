@@ -11,11 +11,13 @@ test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH:-}" || BUILDKITE_PLUGIN_C
 
 tag_params="$(plugin_read_list "TAGS")" ||:
 [ -z "$tag_params" ] || {
-  ssm_tag_params='['
+  unset ssm_tag_params
   for _param in $tag_params ; do
-    ssm_tag_params="${ssm_tag_params},${_param}"
+    [ -n "${ssm_tag_params:-}" ] && \
+      ssm_tag_params="${ssm_tag_params},${_param}" || \
+      ssm_tag_params="${_param}"
   done
-  ssm_tag_params="$ssm_tag_params]"
+  ssm_tag_params="[$ssm_tag_params]"
   export ssm_tag_params
 }
 
