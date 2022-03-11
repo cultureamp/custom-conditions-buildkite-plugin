@@ -12,7 +12,7 @@ test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH:-}" || BUILDKITE_PLUGIN_C
 tag_params="$(plugin_read_list "TAGS")" ||:
 [ -z "$tag_params" ] || {
   ssm_params_tag_switch='"'
-  for _param in $TAG_PARAMS ; do
+  for _param in $tag_params ; do
     ssm_params_tag_switch="${SSM_PARAM_TAGS_SWITCH}${_param}"
   done
   export ssm_params_tag_switch
