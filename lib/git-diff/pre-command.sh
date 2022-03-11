@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -euo pipefail
+[ "${BUILDKITE_PLUGIN_DEBUG:-false}" == "true" ] && set -x ||:
 
 # This condition script allows referencing arbitrary commit hashes or branches
 # to run a git diff against a repository path

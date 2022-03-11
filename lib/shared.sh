@@ -9,4 +9,4 @@ shared_script="$curr_dir/../lib/${condition_type}/shared.sh"
 test -e "$condition_script" || { echo "condition not supported in ${PLUGIN_STAGE}: $condition_type" ; exit 1 ;}
 test ! -e "$shared_script" || . "$shared_script"
 
-exec $condition_script
+$condition_script
