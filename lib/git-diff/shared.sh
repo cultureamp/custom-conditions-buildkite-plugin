@@ -17,7 +17,7 @@ tag_params="$(plugin_read_list "TAGS")" ||:
       ssm_tag_params="${ssm_tag_params},${_param}" || \
       ssm_tag_params="${_param}"
   done
-  ssm_tag_params=$ssm_tag_params
+  ssm_tag_params=[$ssm_tag_params]
   export ssm_tag_params
 }
 
