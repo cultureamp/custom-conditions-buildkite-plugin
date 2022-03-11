@@ -19,11 +19,11 @@ function prefix_read_list() {
     local i=0
     local parameter="${prefix}_${i}"
     while [[ -n "${!parameter:-}" ]]; do
-      echo -n "${!parameter} "
+      echo "${!parameter}"
       i=$((i+1))
       parameter="${prefix}_${i}"
     done
   elif [[ -n "${!prefix:-}" ]]; then
-    echo -n "${!prefix} "
+    echo "${!prefix}"
   fi
 }
