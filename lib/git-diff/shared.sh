@@ -11,12 +11,12 @@ test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH:-}" || BUILDKITE_PLUGIN_C
 
 tag_params="$(plugin_read_list "TAGS")" ||:
 [ -z "$tag_params" ] || {
-  ssm_params_tag_switch='['
+  ssm_tag_params='['
   for _param in $tag_params ; do
-    ssm_params_tag_switch="${ssm_params_tag_switch}${_param}"
+    ssm_tag_params="${ssm_tag_params},${_param}"
   done
-  ssm_params_tag_switch="--tags $ssm_params_tag_switch]"
-  export ssm_params_tag_switch
+  ssm_tag_params="$ssm_tag_params]"
+  export ssm_tag_params
 }
 
 git_cache_reference="$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_CACHE_PREFIX/$BUILDKITE_PIPELINE_SLUG/$BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_GIT_PATH"
