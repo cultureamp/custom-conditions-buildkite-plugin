@@ -1,6 +1,7 @@
 #!/bin/bash
 
 set -euo pipefail
+[ "${BUILDKITE_PLUGIN_DEBUG:-false}" == "true" ] && set -x ||:
 
 # if the meta-data is not set, the cache condition was missed
 # and we want to set it to the current git commit
