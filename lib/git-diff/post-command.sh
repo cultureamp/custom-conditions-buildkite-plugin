@@ -15,7 +15,7 @@ buildkite-agent meta-data get "custom-condition-$BUILDKITE_PLUGIN_CUSTOM_CONDITI
 if [ -n "${ssm_tag_params:-}" ] ; then
   aws ssm add-tags-to-resource \
       --resource-type "Parameter" \
-      --name "/$git_cache_reference" \
+      --resource-id "/$git_cache_reference" \
       --tags $ssm_tag_params
 else
   /bin/true
