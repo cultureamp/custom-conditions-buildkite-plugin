@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -euo pipefail
+[ "${BUILDKITE_PLUGIN_DEBUG:-false}" == "true" ] && set -x ||:
+
 curr_dir="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 
 condition_type="${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_TYPE:-}"
