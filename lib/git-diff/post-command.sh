@@ -10,5 +10,14 @@ buildkite-agent meta-data get "custom-condition-$BUILDKITE_PLUGIN_CUSTOM_CONDITI
     --name "/$git_cache_reference" \
     --type "String" \
     --overwrite \
-    --value "$BUILDKITE_COMMIT" \
-    $ssm_params_tag_switch
+    --value "$BUILDKITE_COMMIT"
+
+if [ -n "$ssm_params_tag_switch" ] ; then
+  aws ssm add-tags-to-resource \
+      --resource-type "Parameter" \
+      --name "/$git_cache_reference" \
+      $ssm_params_tag_switch
+else
+  /bin/true
+fi
+
