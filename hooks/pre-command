@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+[ "${BUILDKITE_PLUGIN_DEBUG:-false}" == "true" ] && set -x ||:
+
 DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 
 PLUGIN_STAGE="pre-command"

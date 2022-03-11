@@ -1,7 +1,6 @@
 #!/bin/bash
 
 set -euo pipefail
-[ "${BUILDKITE_PLUGIN_DEBUG:-false}" == "true" ] && set -x ||:
 
 test -n "${BUILDKITE_COMMIT:-}" || { echo "BUILDKITE_COMMIT environment variable must be provided" ; exit 1;}
 test -n "${BUILDKITE_PLUGIN_CUSTOM_CONDITIONS_NAME:-}" || { echo "condition name must be provided" ; exit 1;}
